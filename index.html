@@ -5,14 +5,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CRUD(Create,Read,Update,Delete)</title>
-    <style></style>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      th,
+      td {
+        text-align: left;
+        padding: 8px;
+      }
+
+      tr:nth-child(even) {
+        background-color: #9df3f3;
+      }
+      thead {
+        background-color: rgb(236, 222, 116);
+        text-align: center;
+      }
+    </style>
   </head>
   <body>
     <form action="">
       <input name="name" type="text" placeholder="enter your name.." />
       <input name="surname" type="text" placeholder="Enter your surname" />
       <input name="address" type="text" placeholder="Address" />
-      <input type="button" value="save" onclick="sunil('ok')" />
+      <input type="button" value="save" onclick="saveData('ok')" />
     </form>
     <hr />
     <table border="1" id="mytable">
@@ -26,9 +45,9 @@
       </thead>
       <tbody>
         <tr>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td>Santosh</td>
+          <td>Chaugule</td>
+          <td>Kolhapur</td>
           <td>
             <button>View</button>
             <button>Edit</button>
@@ -39,38 +58,34 @@
     </table>
 
     <script>
-      //there are two ways to define a function
-
-      //1 old way
-      function santosh() {
-        alert("Santosh");
-      }
-
-      //2 new way (arrow function)
       let n = document.querySelector('input[name="name"]');
       let sn = document.querySelector('input[name="surname"]');
       let addr = document.querySelector('input[name="address"]');
 
       let tbody1 = document.querySelector("table#mytable tbody");
-      let sunil = () => {
+      let saveData = () => {
         console.log(n.value);
         console.log(sn.value);
         console.log(addr.value);
         //apeend technique
         tbody1.innerHTML += `<tr>
-            <td>${n.value} </td>
-            <td>${sn.value}</td>
-            <td>${addr.value}</td>
-            <td>
-                 <button>View</button>
-                 <button>Edit</button>
-                 <button onclick="deleteEl(this)">Delete</button>
-            </td>
-        </tr>`;
+                <td>${n.value} </td>
+                <td>${sn.value}</td>
+                <td>${addr.value}</td>
+                <td>
+                     <button>View</button>
+                     <button>Edit</button>
+                     <button onclick="deleteEl(this)">Delete</button>
+                </td>
+            </tr>`;
         n.value = sn.value = addr.value = "";
       };
       let deleteEl = (x) => {
-        x.closest("tr").remove();
+        if (confirm("Really!") == true) {
+          x.closest("tr").remove();
+        } else {
+          alert("I changed mind!!!");
+        }
       };
     </script>
   </body>
